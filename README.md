@@ -1,6 +1,6 @@
 # Badger Dungeon
 
-Made for Badger 2040 W Devices.
+Made for [Badger 2040 W Devices](https://shop.pimoroni.com/products/badger-2040-w?variant=40514062188627).
 
 You are a badger, on a quest. Delve into the dungeon in search of treasure. But what dangers lurk in every room as you explore deeper into the dungeon? How far you can go in Badger Dungeon!
 
