@@ -1,0 +1,9 @@
+Zombie
+shambles towards you.
+20
+2
+4
+3
+3
+4
+9999

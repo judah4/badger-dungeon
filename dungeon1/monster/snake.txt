@@ -1,0 +1,9 @@
+Snake
+is preparing to strike!
+20
+2
+4
+3
+3
+4
+6

@@ -1,0 +1,9 @@
+Name
+Fight Message
+Attack
+Defense
+Attack Ratio (out of 10)
+Block Ratio (out of 10)
+Heavy Attack Ratio (out of 10)
+minFloor
+maxFloor

@@ -1,0 +1,9 @@
+Ghost
+fades into view.
+20
+2
+4
+3
+3
+4
+9999
