@@ -10,7 +10,7 @@ DEBUG_INPUTS = False
 
 WIDTH = badger2040.WIDTH
 HEIGHT = badger2040.HEIGHT
-VERSION = "v0.7.0"
+VERSION = "v0.7.1"
 GAME_NAME = "BADGER DUNGEON"
 
 PADDING = 2
@@ -19,10 +19,14 @@ MAX_HEALTH = 100
 
 IMAGE_WIDTH = 64
 
-SHOP_ATTACK_ADDITION = 4
+SHOP_ATTACK_ADDITION = 3                                                      
 SHOP_DEFENSE_ADDITION = 1
 SHOP_HEALING_ADDITION = 5
 
+COMBAT_END_GOLD_MULTIPLIER = 1.5
+
+MONSTER_ATTACK_LEVEL_MULTIPLIER = 5
+MONSTER_DEFENSE_LEVEL_MULTIPLIER = 1.5
 # ------------------------------
 #      Utility functions
 # ------------------------------
@@ -30,7 +34,7 @@ SHOP_HEALING_ADDITION = 5
 def default_state():
     return {
     "health": MAX_HEALTH,
-    "attack": 35,
+    "attack": 34,
     "defense": 2,
     "healing": 20,
     "floor": 1,
@@ -59,7 +63,7 @@ def gen_monster(level):
     "fileName": None,
     "level": level,
     "health": 100,
-    "attack": level * 20,
+    "attack": 10, # Calculated when parsing the file in calc_monster_attack
     "defense": 1,
     "message": "is looking for a fight",
     "ratio": [4, 3, 3],
@@ -560,6 +564,14 @@ def get_monster_level(floor):
     # Nice to have, add multiple levels on a floor
     return random.randint(max(1, floor - 1), floor)
 
+def calc_monster_attack(baseAttack, level):
+    
+    return baseAttack + int(level * MONSTER_ATTACK_LEVEL_MULTIPLIER)
+
+def calc_monster_defense(baseDefense, level):
+    
+    return baseDefense + int(level * MONSTER_DEFENSE_LEVEL_MULTIPLIER)
+
 def init_combat():
     state["state"] = "Combat"
     floor = state["floor"]
@@ -606,8 +618,8 @@ def parse_monster_file(monsterFileName, level):
         monsterState["fileName"] = fileNamePart
         monsterState["level"] = level
         monsterState["message"] = monsterFile.readline().strip()
-        monsterState["attack"] = int(monsterFile.readline()) * level
-        monsterState["defense"] = int(monsterFile.readline())
+        monsterState["attack"] = calc_monster_attack(int(monsterFile.readline()), level)
+        monsterState["defense"] = calc_monster_defense(int(monsterFile.readline()), level)
         
         attackRatio = int(monsterFile.readline())
         blockRatio = int(monsterFile.readline())
@@ -680,7 +692,7 @@ def do_combat():
         fullMessage = f"took {damage} dmg and died. You won!"
     elif monsterAction == 0:
         monsterDamage = max(1, monsterAttack - defense)
-        fullMessage = f"attacked ({monsterAttack}). {damageMessage}"
+        fullMessage = f"attacked ({monsterDamage}). {damageMessage}"
         health -= monsterDamage
         if selectAction == 1: # blocked, retaliate
             attackMultiplier += 1
@@ -688,7 +700,7 @@ def do_combat():
         fullMessage = f"blocked. {damageMessage}"
     elif monsterAction == 2:
         monsterDamage = max(1, monsterAttack - defense)
-        fullMessage = f"heavy attacked ({monsterAttack}). {damageMessage}"
+        fullMessage = f"heavy attacked ({monsterDamage}). {damageMessage}"
         health -= monsterDamage
     else:
         fullMessage = f"unknown action {monsterAction}. {damageMessage}"
@@ -704,8 +716,8 @@ def do_combat():
         state["state"] = "Dead"
         
 def end_combat():
-    
-    state["gold"] += state["monster"]["level"]
+    newGold = state["monster"]["level"] * COMBAT_END_GOLD_MULTIPLIER
+    state["gold"] += int(newGold)
     
     state["state"] = "Room"
     
