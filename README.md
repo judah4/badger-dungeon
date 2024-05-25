@@ -4,6 +4,14 @@ Made for Badger 2040 W Devices.
 
 You are a badger, on a quest. Delve into the dungeon in search of treasure. But what dangers lurk in every room as you explore deeper into the dungeon? How far you can go in Badger Dungeon!
 
+![Combat](documentation/images/BadgerDungeonCombat.jpg)
+
+Combat Screen
+
+![Floor Exploration](documentation/images/BadgerDungeonExplore.jpg)
+
+Floor Exploration
+
 ## Installing
 
 Copy the files in examples and dungeon1 to the Badger 2040. The game uses about half the Badger 2040's storage.
