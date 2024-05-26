@@ -4,13 +4,17 @@ Made for [Badger 2040 W Devices](https://shop.pimoroni.com/products/badger-2040-
 
 You are a badger, on a quest. Delve into the dungeon in search of treasure. But what dangers lurk in every room as you explore deeper into the dungeon? How far you can go in Badger Dungeon!
 
+Combat Screen
+
 ![Combat](documentation/images/BadgerDungeonCombat.jpg)
 
-Combat Screen
+Floor Exploration
 
 ![Floor Exploration](documentation/images/BadgerDungeonExplore.jpg)
 
-Floor Exploration
+Playthrough Video
+
+https://youtu.be/LB7WKcnUTI4
 
 ## Installing
 
@@ -27,5 +31,8 @@ Badger booklet art originally from https://pixabay.com/users/andyballard-1141862
 
 ## Printing Instruction Booklet
 
-Booklet
+Print as a word booklet.
+
 Print both Sides - Flip pages on short edge
+
+Trim bottom of page to size.
